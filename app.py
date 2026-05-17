@@ -13,7 +13,7 @@ st.set_page_config(
 ACCESS_KEY = "SOFYAN2026"
 DURASI_JAM = 24
 
-st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
+
 
 # ==================== CUSTOM CSS (LEBIH KEREN) ====================
 st.markdown("""
