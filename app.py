@@ -3,8 +3,8 @@ import random
 from datetime import datetime
 
 # ==================== KONFIGURASI MUDAH DIUBAH ====================
-ACCESS_KEY = "sofyantest"          # ← GANTI KEY DI SINI
-DURASI_JAM = 2                     # ← GANTI DURASI (jam)
+ACCESS_KEY = "romitest"          # ← GANTI KEY DI SINI
+DURASI_JAM = 1                     # ← GANTI DURASI (jam)
 
 st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
 
@@ -48,19 +48,26 @@ if "access_granted" not in st.session_state:
 
 if not st.session_state.access_granted:
     st.title("🔐 Animal Fight Prompt Generator")
+    st.subheader("Masukkan Access Key untuk Melanjutkan")
+    
     key_input = st.text_input("Access Key", type="password")
+    
     if st.button("Masuk"):
         if key_input == ACCESS_KEY:
             st.session_state.access_granted = True
             st.session_state.access_time = datetime.now()
             st.rerun()
         else:
-            st.error("❌ Key salah!")
+            st.error("❌ Access Key salah!")
+            st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
+    
     st.stop()
 
+# Cek masa aktif
 if st.session_state.access_time:
     if (datetime.now() - st.session_state.access_time).total_seconds() > DURASI_JAM * 3600:
-        st.error(f"⏰ Akses kadaluarsa ({DURASI_JAM} jam)")
+        st.error(f"⏰ Akses telah kadaluarsa ({DURASI_JAM} jam).")
+        st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
         st.stop()
 
 # ==================== MAIN APP ====================
@@ -115,7 +122,10 @@ if st.button("🚀 GENERATE", use_container_width=True, type="primary", key="gen
     elif "Analysis" in prompt_type:
         prompt = f"Analisis lengkap {attacker} vs {defender} di {habitat}. Kekuatan, strategi, prediksi pemenang."
     else:
-        prompt = f"IMAGE: {base} 8K\nVIDEO: {durasi}s cinematic\nLEONARDO: Epic art\nANALYSIS: Detail strategi"
+        prompt = f"""IMAGE: {base} 8K
+VIDEO: {durasi}s cinematic
+LEONARDO: Epic art
+ANALYSIS: Detail strategi"""
 
     st.session_state.final_prompt = prompt
     st.session_state.final_title = f"{attacker} vs {defender}"
