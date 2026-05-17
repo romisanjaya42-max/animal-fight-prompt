@@ -2,18 +2,12 @@ import streamlit as st
 import random
 from datetime import datetime
 
-st.set_page_config(
-    page_title="🐾 Animal Fight Prompt Generator",
-    page_icon="🐾",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # ==================== KONFIGURASI MUDAH DIUBAH ====================
 ACCESS_KEY = "SOFYAN2026"
 DURASI_JAM = 24
 
-
+st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
 
 # ==================== CUSTOM CSS (LEBIH KEREN) ====================
 st.markdown("""
