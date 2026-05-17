@@ -130,4 +130,4 @@ if "final_prompt" in st.session_state:
     with col2:
         st.button("🎬 Buka Kling AI", key="kling_btn")
 
-st.caption("By SOFYAN • v3.2 • 2026")
+st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
