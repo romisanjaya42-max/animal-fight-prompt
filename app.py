@@ -72,7 +72,8 @@ if st.session_state.access_time:
 
 # ==================== MAIN APP ====================
 st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', unsafe_allow_html=True)
-st.markdown('<p class="by-sofyan">By SOFYAN • https://facebook.com/yankees.romi</p>', unsafe_allow_html=True)
+st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
+
 
 with st.sidebar:
     st.success(f"✅ Akses aktif ({DURASI_JAM} jam)")
