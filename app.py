@@ -143,13 +143,11 @@ Buat analisis lengkap pertarungan {attacker} vs {defender} di {habitat}. Jelaska
 
 if "final_prompt" in st.session_state:
     st.success(f"✅ {st.session_state.final_title}")
-    st.code(st.session_state.final_prompt)
     
-    st.info("💡 Klik ikon 📋 di pojok kanan atas kode di atas untuk menyalin prompt")
+    st.code(st.session_state.final_prompt, language="markdown")
     
-    if st.button("📋 Copy Prompt", key="copy_btn"):
-        st.toast("✅ Silakan klik ikon copy di pojok kanan atas kode prompt!")
-
+    st.info("💡 **Cara menyalin:** Klik ikon 📋 di pojok kanan atas kode di atas")
+    
     if st.button("🎨 Buka Leonardo AI", key="leonardo_btn"):
         st.markdown("[Buka Leonardo AI](https://leonardo.ai)")
 
