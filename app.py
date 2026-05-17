@@ -130,10 +130,6 @@ with st.sidebar:
         st.session_state.access_granted = False
         st.rerun()
 
-# ==================== HEADER ====================
-st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Versi Web Streamlit • Image + Video + Analysis • Pertarungan Hewan & Fantasy</p>', unsafe_allow_html=True)
-
 # ==================== SIDEBAR ====================
 with st.sidebar:
     st.header("⚙️ Pengaturan Cepat")
