@@ -191,7 +191,8 @@ st.divider()
 if st.button("🚀 GENERATE PROMPT SEKARANG", use_container_width=True, type="primary"):
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
-    if "Video" in prompt_type or "Leonardo" in prompt_type:
+   # Slider durasi (dengan indentasi yang benar)
+if "Video" in prompt_type or "Leonardo" in prompt_type or "All-in-One" in prompt_type:
     durasi = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
 
     
