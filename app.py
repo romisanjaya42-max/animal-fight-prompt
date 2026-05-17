@@ -158,22 +158,22 @@ mode = st.radio(
 
 # ==================== INPUT SECTION ====================
 col1, col2 = st.columns(2)
-
 with col1:
-    st.markdown("### 🦁 Penyerang")
     if "Fantasy" in mode:
-        attacker = st.selectbox("Pilih Fantasy Creature", FANTASY_CREATURES, key="attacker")
+        attacker = st.selectbox("Penyerang", FANTASY_CREATURES, key="attacker_fantasy")
     else:
-        attacker = st.selectbox("Pilih Hewan", ANIMALS_WORLD, key="attacker")
+        attacker = st.selectbox("Penyerang", ANIMALS_WORLD, key="attacker_real")
+    attacker = st.text_input("Custom Penyerang", key="custom_attacker") or attacker
 
 with col2:
-    st.markdown("### 🐅 Lawan")
     if "Fantasy vs Fantasy" in mode:
-        defender = st.selectbox("Pilih Fantasy Creature", FANTASY_CREATURES, key="defender")
+        defender = st.selectbox("Lawan", FANTASY_CREATURES, key="defender_fantasy")
     else:
-        defender = st.selectbox("Pilih Hewan", ANIMALS_WORLD, key="defender")
+        defender = st.selectbox("Lawan", ANIMALS_WORLD, key="defender_real")
+    defender = st.text_input("Custom Lawan", key="custom_defender") or defender
 
-habitat = st.selectbox("🌍 Habitat Pertarungan", HABITATS, index=0)
+habitat = st.selectbox("🌍 Habitat", HABITATS, key="habitat")
+habitat = st.text_input("Custom Habitat", key="custom_habitat") or habitat
 
 # Prompt Type
 st.subheader("📝 Jenis Prompt")
@@ -190,6 +190,10 @@ prompt_type = st.radio(
 st.divider()
 if st.button("🚀 GENERATE PROMPT SEKARANG", use_container_width=True, type="primary"):
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    if "Video" in prompt_type or "Leonardo" in prompt_type:
+    durasi = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
+
     
     if "Fantasy" in mode:
         title = f"{attacker} vs {defender}"
@@ -241,4 +245,5 @@ if "generated_prompt" in st.session_state:
             st.markdown("[Klik di sini untuk buka Kling AI](https://kling.ai)")
             st.info("Setelah Kling AI terbuka, tekan Ctrl+V untuk paste prompt otomatis.")
 
-st.caption("Animal Fight Prompt Generator v3.0 • Streamlit Cloud • 2026")
+st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
+
