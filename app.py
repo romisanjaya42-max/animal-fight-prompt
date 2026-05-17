@@ -4,7 +4,7 @@ from datetime import datetime
 
 # ==================== DAFTAR USER (EDIT DI SINI) ====================
 USERS = {
-    "romites2":     {"durasi_jam": 8760,   "start_time": None},   # Admin (1 Tahun)
+    "sofyan101":     {"durasi_jam": 8760,   "start_time": None},   # Admin (1 Tahun)
     "boy1":       {"durasi_jam": 1,  "start_time": None},   # 1 jam
     "user02":       {"durasi_jam": 24,  "start_time": None},   # 24 jam
     "user03":       {"durasi_jam": 48,  "start_time": None},   # 2 hari
