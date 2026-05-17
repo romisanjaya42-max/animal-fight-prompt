@@ -4,7 +4,7 @@ from datetime import datetime
 
 # ==================== KONFIGURASI MUDAH DIUBAH ====================
 ACCESS_KEY = "romites2"
-DURASI_JAM = 2
+DURASI_JAM = 1
 
 st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
 
@@ -40,7 +40,7 @@ HABITATS = ["Savana Afrika yang panas", "Hutan Hujan Amazon yang lebat", "Gunung
     "Hutan Tropis Indonesia", "Gunung Berapi Aktif", "Lembah Sungai Nil", "Kawah Vulkanik",
     "Hutan Bambu Cina", "Padang Es Antartika"]
 
-# ==================== ACCESS CONTROL ====================
+# ==================== ACCESS CONTROL + SISA WAKTU ====================
 if "access_granted" not in st.session_state:
     st.session_state.access_granted = False
     st.session_state.access_time = None
@@ -58,11 +58,19 @@ if not st.session_state.access_granted:
             st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
     st.stop()
 
+# Hitung sisa waktu
 if st.session_state.access_time:
-    if (datetime.now() - st.session_state.access_time).total_seconds() > DURASI_JAM * 3600:
-        st.error(f"⏰ Akses kadaluarsa ({DURASI_JAM} jam)")
+    waktu_berlalu = datetime.now() - st.session_state.access_time
+    sisa_detik = (DURASI_JAM * 3600) - waktu_berlalu.total_seconds()
+    
+    if sisa_detik <= 0:
+        st.error(f"⏰ Akses telah kadaluarsa ({DURASI_JAM} jam).")
         st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
         st.stop()
+    else:
+        jam = int(sisa_detik // 3600)
+        menit = int((sisa_detik % 3600) // 60)
+        st.sidebar.success(f"⏳ Sisa waktu akses: {jam} jam {menit} menit")
 
 # ==================== MAIN APP ====================
 st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', unsafe_allow_html=True)
