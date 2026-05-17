@@ -175,21 +175,6 @@ with col2:
 habitat = st.selectbox("🌍 Habitat", HABITATS, key="habitat")
 habitat = st.text_input("Custom Habitat", key="custom_habitat") or habitat
 
-# Prompt Type
-st.subheader("📝 Jenis Prompt")
-prompt_type = st.radio(
-    "",
-    ["🖼️ Image Prompt (Midjourney / Flux / Grok Imagine)",
-     "🎥 Video Prompt (Kling AI / Runway / Luma / Pika)",
-     "📖 Battle Analysis (ChatGPT / Claude)",
-     "🔥 All-in-One (Semua Sekaligus)"],
-    horizontal=True
-)
-
-# Generate Button
-st.divider()
-if st.button("🚀 GENERATE PROMPT SEKARANG", use_container_width=True, type="primary"):
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
    # Slider durasi (dengan indentasi yang benar)
 if "Video" in prompt_type or "Leonardo" in prompt_type or "All-in-One" in prompt_type:
