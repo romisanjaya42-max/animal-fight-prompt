@@ -77,6 +77,7 @@ start_time = user_data["start_time"]
 
 if start_time:
     sisa_detik = (durasi * 3600) - (datetime.now() - start_time).total_seconds()
+    
     if sisa_detik <= 0:
         st.error(f"⏰ Akses {current_key} telah kadaluarsa ({durasi} jam).")
         st.info("📌 Hubungi admin untuk perpanjangan.")
@@ -84,8 +85,10 @@ if start_time:
     else:
         jam = int(sisa_detik // 3600)
         menit = int((sisa_detik % 3600) // 60)
-        st.sidebar.success(f"👤 User: {current_key}")
-        st.sidebar.success(f"⏳ Sisa waktu: {jam} jam {menit} menit")
+        
+        with st.sidebar:
+            st.success(f"👤 User: {current_key}")
+            st.success(f"⏳ Sisa waktu: {jam} jam {menit} menit")
 
 # ==================== MAIN APP ====================
 st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', unsafe_allow_html=True)
