@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 # ==================== KONFIGURASI SUPER MUDAH DIUBAH (EDIT DI SINI SAJA) ====================
 ACCESS_KEY = "SOFYAN2026"          # ← GANTI KEY DI SINI (bagikan ke user)
-DURASI_JAM = 24                     # ← GANTI DURASI AKSES (dalam jam)
+DURASI_JAM = 1                     # ← GANTI DURASI AKSES (dalam jam)
 
 st.set_page_config(
     page_title="🐾 Animal Fight Prompt Generator",
