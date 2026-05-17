@@ -215,8 +215,32 @@ Create a 12-second ultra cinematic video. Start with wide shot, slow orbiting ca
         prompt = f"""Buat analisis lengkap dan dramatis pertarungan antara {attacker} vs {defender} di {habitat}.
 Jelaskan kekuatan, strategi, kelemahan, dan prediksi pemenang dengan gaya narasi epik seperti film dokumenter."""
     
+# ==================== PILIHAN GAYA VISUAL (BARU) ====================
+visual_style = st.selectbox("🎨 Pilih Gaya Visual", 
+    ["Cinematic Epic", "Hyper Realistic", "Dark Fantasy", 
+     "National Geographic Documentary", "Slow Motion Action", "Dramatic Lighting"], 
+    key="visual_style")
+
+prompt_type = st.radio("📝 Jenis Prompt", 
+    ["🖼️ Image", "🎥 Video", "🎨 Leonardo AI", "📖 Analysis", "🔥 All-in-One"], 
+    horizontal=True, key="prompt_type")
+
+if "Video" in prompt_type or "Leonardo" in prompt_type or "All-in-One" in prompt_type:
+    durasi = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
+
+if st.button("🚀 GENERATE", use_container_width=True, type="primary", key="generate_btn"):
+    base = f"Masterpiece epic battle between {attacker} and {defender} in the {habitat}, {visual_style} style."
+
+    if "Image" in prompt_type:
+        prompt = f"{base} Hyper-realistic 8K, cinematic lighting, intense action --ar 16:9 --stylize 250"
+    elif "Video" in prompt_type:
+        prompt = f"{base} {durasi}-second cinematic video, slow-motion, dramatic camera movement."
+    elif "Leonardo" in prompt_type:
+        prompt = f"{base} Highly detailed digital art, dramatic lighting, 8K --ar 16:9"
+    elif "Analysis" in prompt_type:
+        prompt = f"Analisis lengkap {attacker} vs {defender} di {habitat}. Kekuatan, strategi, prediksi pemenang."
     else:  # All-in-One (Versi Sempurna)
-    prompt = f"""=== ALL-IN-ONE PROMPT PACK ===
+        prompt = f"""=== ALL-IN-ONE PROMPT PACK ===
 
 🖼️ IMAGE PROMPT (Midjourney / Flux / Grok Imagine):
 {base}
