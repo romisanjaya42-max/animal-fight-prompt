@@ -6,7 +6,7 @@ from datetime import datetime
 USERS = {
     "sofyan101":     {"durasi_jam": 8760,   "start_time": None},   # Admin (1 Tahun)
     "boy1":       {"durasi_jam": 1,  "start_time": None},   # 1 jam
-    "user02":       {"durasi_jam": 24,  "start_time": None},   # 24 jam
+    "user2":       {"durasi_jam": 2,  "start_time": None},   # 2 jam
     "user03":       {"durasi_jam": 48,  "start_time": None},   # 2 hari
     "user04":       {"durasi_jam": 72,  "start_time": None},   # 3 hari
     "user05":       {"durasi_jam": 168, "start_time": None},   # 7 hari
