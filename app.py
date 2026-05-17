@@ -2,29 +2,15 @@ import streamlit as st
 import random
 from datetime import datetime
 
-# ==================== DAFTAR USER ====================
+# ==================== DAFTAR USER (EDIT DI SINI) ====================
 USERS = {
-    "romisan":     {"durasi_jam": 8760,   "start_time": None},   # ADMIN
-    "user01":       {"durasi_jam": 1,  "start_time": None},
-    "user02":       {"durasi_jam": 24,  "start_time": None},
-    "user03":       {"durasi_jam": 48,  "start_time": None},
-    "user04":       {"durasi_jam": 72,  "start_time": None},
-    "user05":       {"durasi_jam": 168, "start_time": None},
-    "user06":       {"durasi_jam": 24,  "start_time": None},
-    "user07":       {"durasi_jam": 48,  "start_time": None},
-    "user08":       {"durasi_jam": 72,  "start_time": None},
-    "user09":       {"durasi_jam": 24,  "start_time": None},
-    "user10":       {"durasi_jam": 168, "start_time": None},
-    "user11":       {"durasi_jam": 24,  "start_time": None},
-    "user12":       {"durasi_jam": 48,  "start_time": None},
-    "user13":       {"durasi_jam": 72,  "start_time": None},
-    "user14":       {"durasi_jam": 24,  "start_time": None},
-    "user15":       {"durasi_jam": 168, "start_time": None},
-    "user16":       {"durasi_jam": 24,  "start_time": None},
-    "user17":       {"durasi_jam": 48,  "start_time": None},
-    "user18":       {"durasi_jam": 72,  "start_time": None},
-    "user19":       {"durasi_jam": 24,  "start_time": None},
-    "user20":       {"durasi_jam": 168, "start_time": None},
+    "SOFYAN2026":   {"durasi_jam": 8760, "start_time": None},   # Admin
+    "USER01":       {"durasi_jam": 1, "start_time": None},   # 1 jam
+    "USER02":       {"durasi_jam": 24, "start_time": None},   # 24 jam
+    "USER03":       {"durasi_jam": 48, "start_time": None},   # 2 hari
+    "USER04":       {"durasi_jam": 72, "start_time": None},   # 3 hari
+    "USER05":       {"durasi_jam": 168, "start_time": None},  # 7 hari
+    # Tambahkan sampai 20 user di sini
 }
 
 st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
@@ -38,6 +24,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ==================== DATA HEWAN & HABITAT ====================
 ANIMALS_WORLD = ["Singa", "Harimau Sumatra", "Gajah Afrika", "Komodo", "Orca", "Hiu Putih Besar",
     "Beruang Grizzly", "Beruang Kutub", "Anaconda Hijau", "Elang Botak", "Serigala Abu-abu",
     "Kuda Nil", "Badak Putih", "Macan Tutul", "Buaya Nil", "Ular Kobra Raja", "Gorila Gunung",
@@ -61,7 +48,7 @@ HABITATS = ["Savana Afrika yang panas", "Hutan Hujan Amazon yang lebat", "Gunung
     "Hutan Tropis Indonesia", "Gunung Berapi Aktif", "Lembah Sungai Nil", "Kawah Vulkanik",
     "Hutan Bambu Cina", "Padang Es Antartika"]
 
-# ==================== MULTI-USER ACCESS ====================
+# ==================== ACCESS CONTROL MULTI USER ====================
 if "current_user" not in st.session_state:
     st.session_state.current_user = None
     st.session_state.access_time = None
@@ -69,6 +56,7 @@ if "current_user" not in st.session_state:
 if st.session_state.current_user is None:
     st.title("🔐 Animal Fight Prompt Generator")
     key_input = st.text_input("Access Key", type="password")
+    
     if st.button("Masuk"):
         if key_input in USERS:
             st.session_state.current_user = key_input
@@ -81,6 +69,7 @@ if st.session_state.current_user is None:
             st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
     st.stop()
 
+# Cek durasi user saat ini
 current_key = st.session_state.current_user
 user_data = USERS[current_key]
 durasi = user_data["durasi_jam"]
@@ -103,29 +92,12 @@ st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', un
 st.markdown('<p class="by-sofyan">By SOFYAN • https://facebook.com/yankees.romi</p>', unsafe_allow_html=True)
 
 with st.sidebar:
-    if st.button("🔄 Reset Durasi Saya"):
-        USERS[current_key]["start_time"] = datetime.now()
-        st.success("✅ Durasi kamu berhasil di-reset!")
-        st.rerun()
-    
     if st.button("🔄 Logout"):
         st.session_state.current_user = None
         st.rerun()
 
-# ==================== RESET KHUSUS ADMIN ====================
-if current_key == "romisan":  # Hanya admin yang bisa
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("👑 Admin Panel")
-    
-    user_list = list(USERS.keys())
-    selected_user = st.sidebar.selectbox("Pilih User", user_list, key="admin_select")
-    
-    if st.sidebar.button("🔄 Reset Durasi User Ini", use_container_width=True):
-        USERS[selected_user]["start_time"] = datetime.now()
-        st.sidebar.success(f"✅ Durasi {selected_user} berhasil di-reset!")
-        st.rerun()
+# ... (sisa kode mode, input hewan, prompt, dll tetap sama seperti sebelumnya)
 
-# ==================== MODE & INPUT ====================
 mode = st.radio("🎯 Mode", ["🦁 Real vs Real", "🦄 Fantasy vs Real", "🐉 Fantasy vs Fantasy"], horizontal=True, key="mode")
 
 col1, col2 = st.columns(2)
@@ -156,7 +128,7 @@ prompt_type = st.radio("📝 Jenis Prompt",
     horizontal=True, key="prompt_type")
 
 if "Video" in prompt_type or "Leonardo" in prompt_type or "All-in-One" in prompt_type:
-    durasi_video = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
+    durasi = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
 
 if st.button("🚀 GENERATE", use_container_width=True, type="primary", key="generate_btn"):
     base = f"Masterpiece epic battle between {attacker} and {defender} in the {habitat}, {visual_style} style."
@@ -164,7 +136,7 @@ if st.button("🚀 GENERATE", use_container_width=True, type="primary", key="gen
     if "Image" in prompt_type:
         prompt = f"{base} Hyper-realistic 8K, cinematic lighting, intense action --ar 16:9 --stylize 250"
     elif "Video" in prompt_type:
-        prompt = f"{base} {durasi_video}-second cinematic video, slow-motion, dramatic camera movement."
+        prompt = f"{base} {durasi}-second cinematic video, slow-motion, dramatic camera movement."
     elif "Leonardo" in prompt_type:
         prompt = f"{base} Epic digital art, dramatic lighting, 8K --ar 16:9"
     elif "Analysis" in prompt_type:
@@ -173,7 +145,7 @@ if st.button("🚀 GENERATE", use_container_width=True, type="primary", key="gen
         prompt = f"""=== ALL-IN-ONE PROMPT PACK ===
 
 🖼️ IMAGE: {base} 8K --ar 16:9
-🎥 VIDEO: {durasi_video}s cinematic
+🎥 VIDEO: {durasi}s cinematic
 🎨 LEONARDO: Epic digital art
 📖 ANALYSIS: Detail kekuatan & strategi"""
 
@@ -188,4 +160,4 @@ if "final_prompt" in st.session_state:
     if st.button("🎨 Buka Leonardo AI", key="leonardo_btn"):
         st.markdown("[Buka Leonardo AI](https://leonardo.ai)")
 
-st.caption("By SOFYAN • Multi-User + Admin Panel • v5.1 • 2026")
+st.caption("By SOFYAN • https://facebook.com/yankees.romi • v1.3 • 2026")
