@@ -4,7 +4,7 @@ from datetime import datetime
 
 # ==================== KONFIGURASI MUDAH DIUBAH ====================
 ACCESS_KEY = "romites"
-DURASI_MENIT = 45
+DURASI_JAM = 1
 
 st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
 
