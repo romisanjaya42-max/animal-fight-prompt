@@ -145,14 +145,10 @@ if "final_prompt" in st.session_state:
     st.success(f"✅ {st.session_state.final_title}")
     st.code(st.session_state.final_prompt)
     
-    col1, col2 = st.columns(2)
-    with col1:
-            if st.button("📋 Copy Prompt", use_container_width=True):
-            st.toast("Prompt berhasil di-copy!")
-
-    with col2:
-        if st.button("🎬 Buka Leonardo AI + Paste", use_container_width=True):
-            st.markdown("[Klik di sini untuk buka Leonardo AI](https://app.leonardo.ai/)")
-            st.info("Setelah Leonardo AI terbuka, tekan Ctrl+V untuk paste prompt otomatis.")
+    if st.button("📋 Copy Prompt", key="copy_btn"):
+        st.toast("✅ Prompt berhasil di-copy!")
+    
+    if st.button("🎨 Buka Leonardo AI", key="leonardo_btn"):
+        st.markdown("[Buka Leonardo AI](https://leonardo.ai)")
 
 st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
