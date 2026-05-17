@@ -86,7 +86,7 @@ if start_time:
         jam = int(sisa_detik // 3600)
         menit = int((sisa_detik % 3600) // 60)
         
-        with st.sidebar:
+        **with st.sidebar:**
             st.success(f"👤 User: {current_key}")
             st.success(f"⏳ Sisa waktu: {jam} jam {menit} menit")
 
