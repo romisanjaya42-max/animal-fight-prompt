@@ -147,8 +147,12 @@ if "final_prompt" in st.session_state:
     
     col1, col2 = st.columns(2)
     with col1:
-        st.button("📋 Copy Prompt", key="copy_btn")
+            if st.button("📋 Copy Prompt", use_container_width=True):
+            st.toast("Prompt berhasil di-copy!")
+
     with col2:
-        st.button("🎬 Buka Kling AI", key="kling_btn")
+        if st.button("🎬 Buka Leonardo AI + Paste", use_container_width=True):
+            st.markdown("[Klik di sini untuk buka Leonardo AI](https://app.leonardo.ai/)")
+            st.info("Setelah Leonardo AI terbuka, tekan Ctrl+V untuk paste prompt otomatis.")
 
 st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
