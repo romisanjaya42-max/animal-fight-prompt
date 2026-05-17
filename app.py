@@ -215,13 +215,31 @@ Create a 12-second ultra cinematic video. Start with wide shot, slow orbiting ca
         prompt = f"""Buat analisis lengkap dan dramatis pertarungan antara {attacker} vs {defender} di {habitat}.
 Jelaskan kekuatan, strategi, kelemahan, dan prediksi pemenang dengan gaya narasi epik seperti film dokumenter."""
     
-    else:  # All-in-One
-        prompt = f"""=== ALL-IN-ONE PROMPT PACK ===
+    else:  # All-in-One (Versi Sempurna)
+    prompt = f"""=== ALL-IN-ONE PROMPT PACK ===
 
-🖼️ IMAGE: {base} Hyper-realistic 8K battle --ar 16:9
-🎥 VIDEO: 12-second cinematic fight with slow-motion and dramatic camera work.
-📖 ANALYSIS: Analisis lengkap kekuatan dan strategi {attacker} vs {defender}."""
+🖼️ IMAGE PROMPT (Midjourney / Flux / Grok Imagine):
+{base}
+Hyper-realistic 8K, cinematic lighting, intense action, dramatic atmosphere, ultra detailed, National Geographic quality --ar 16:9 --stylize 250 --v 6
 
+🎥 VIDEO PROMPT (Kling AI / Runway / Luma / Pika):
+{base}
+{durasi}-second ultra cinematic video. Start with wide establishing shot, slow orbiting camera, intense slow-motion clash, dramatic music swell, dust & particles, emotional close-ups. Hyper-realistic 8K, National Geographic wildlife cinematography. --ar 16:9 --motion high
+
+🎨 LEONARDO AI PROMPT:
+{base}
+Highly detailed digital art, epic fantasy style, dramatic volumetric lighting, ultra realistic textures, best quality, masterpiece, 8K resolution --ar 16:9 --stylize {durasi}
+
+📖 BATTLE ANALYSIS (ChatGPT / Claude):
+Buat analisis lengkap dan dramatis pertarungan antara {attacker} vs {defender} di habitat {habitat}.
+Jelaskan:
+1. Perbandingan kekuatan & kelemahan
+2. Strategi bertarung yang mungkin digunakan
+3. Simulasi pertarungan langkah demi langkah
+4. Prediksi pemenang beserta alasan ilmiah + faktor keberuntungan
+
+Gunakan gaya narasi epik seperti film dokumenter hewan liar."""
+    
     st.session_state.generated_prompt = prompt
     st.session_state.title = title
 
@@ -243,8 +261,8 @@ if "generated_prompt" in st.session_state:
     
     with col_btn2:
         if st.button("🎬 Buka Kling AI + Paste", use_container_width=True):
-            st.markdown("[Klik di sini untuk buka Kling AI](https://kling.ai)")
-            st.info("Setelah Kling AI terbuka, tekan Ctrl+V untuk paste prompt otomatis.")
+            st.markdown("[Klik di sini untuk buka Leonardo AI](https://app.leonardo.ai/)")
+            st.info("Setelah leonardo AI terbuka, tekan Ctrl+V untuk paste prompt otomatis.")
 
 st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
 
