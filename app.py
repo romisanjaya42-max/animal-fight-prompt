@@ -102,6 +102,40 @@ HABITATS = [
     "Hutan Bambu Cina", "Padang Es Antartika"
 ]
 
+# ==================== ACCESS CONTROL ====================
+if "access_granted" not in st.session_state:
+    st.session_state.access_granted = False
+    st.session_state.access_time = None
+
+if not st.session_state.access_granted:
+    st.title("🔐 Animal Fight Prompt Generator")
+    key_input = st.text_input("Access Key", type="password")
+    if st.button("Masuk"):
+        if key_input == ACCESS_KEY:
+            st.session_state.access_granted = True
+            st.session_state.access_time = datetime.now()
+            st.rerun()
+        else:
+            st.error("❌ Access Key salah!")
+            st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
+    st.stop()
+
+if st.session_state.access_time:
+    if (datetime.now() - st.session_state.access_time).total_seconds() > DURASI_JAM * 3600:
+        st.error(f"⏰ Akses kadaluarsa ({DURASI_JAM} jam)")
+        st.info("📌 Jika tidak memiliki akses, hubungi admin di Telegram: https://t.me/Furaney")
+        st.stop()
+
+# ==================== MAIN APP ====================
+st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', unsafe_allow_html=True)
+st.markdown('<p class="by-sofyan">By SOFYAN • https://facebook.com/yankees.romi</p>', unsafe_allow_html=True)
+
+with st.sidebar:
+    st.success(f"✅ Akses aktif ({DURASI_JAM} jam)")
+    if st.button("🔄 Reset Akses"):
+        st.session_state.access_granted = False
+        st.rerun()
+
 # ==================== HEADER ====================
 st.markdown('<h1 class="main-title">🐾 ANIMAL FIGHT PROMPT GENERATOR</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Versi Web Streamlit • Image + Video + Analysis • Pertarungan Hewan & Fantasy</p>', unsafe_allow_html=True)
