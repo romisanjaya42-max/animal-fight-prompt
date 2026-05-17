@@ -2,73 +2,22 @@ import streamlit as st
 import random
 from datetime import datetime
 
-
 # ==================== KONFIGURASI MUDAH DIUBAH ====================
 ACCESS_KEY = "SOFYAN2026"
 DURASI_JAM = 24
 
 st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
 
-# ==================== CUSTOM CSS (LEBIH KEREN) ====================
 st.markdown("""
 <style>
-    .main-title {
-        font-size: 3.2rem;
-        font-weight: 900;
-        text-align: center;
-        background: linear-gradient(90deg, #FF6B35, #F7931E, #FF6B35);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.3rem;
-    }
-    .subtitle {
-        text-align: center;
-        font-size: 1.25rem;
-        color: #444;
-        margin-bottom: 2rem;
-    }
-    .stButton>button {
-        background: linear-gradient(90deg, #FF6B35, #F7931E);
-        color: white;
-        font-weight: bold;
-        border: none;
-        padding: 0.9rem 2.5rem;
-        border-radius: 50px;
-        font-size: 1.15rem;
-        transition: all 0.3s ease;
-    }
-    .stButton>button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 25px rgba(255, 107, 53, 0.4);
-    }
-    .section-header {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #FF6B35;
-        margin-bottom: 0.8rem;
-    }
-    .prompt-box {
-        background: #f8f9fa;
-        border-left: 8px solid #FF6B35;
-        padding: 1.8rem;
-        border-radius: 12px;
-        font-family: 'Courier New', monospace;
-        font-size: 0.95rem;
-        line-height: 1.7;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-    .success-box {
-        background: linear-gradient(90deg, #d4edda, #c3e6cb);
-        padding: 1rem;
-        border-radius: 10px;
-        border-left: 6px solid #28a745;
-    }
+    .main-title {font-size: 3rem; font-weight: 900; text-align: center; 
+                 background: linear-gradient(90deg, #FF6B35, #F7931E); 
+                 -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+    .by-sofyan {text-align: center; color: #FF6B35; font-weight: bold; margin-bottom: 1.5rem;}
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== DATA ====================
-ANIMALS_WORLD = [
-    "Singa", "Harimau Sumatra", "Gajah Afrika", "Komodo", "Orca", "Hiu Putih Besar",
+ANIMALS_WORLD = ["Singa", "Harimau Sumatra", "Gajah Afrika", "Komodo", "Orca", "Hiu Putih Besar",
     "Beruang Grizzly", "Beruang Kutub", "Anaconda Hijau", "Elang Botak", "Serigala Abu-abu",
     "Kuda Nil", "Badak Putih", "Macan Tutul", "Buaya Nil", "Ular Kobra Raja", "Gorila Gunung",
     "Simpanse", "Zebra", "Jerapah", "Bison Amerika", "Moose", "Penguin Kaisar", "Paus Biru",
@@ -78,23 +27,18 @@ ANIMALS_WORLD = [
     "Capybara", "Piranha", "Electric Eel", "Alligator Amerika", "Python Burma",
     "T-Rex", "Velociraptor", "Spinosaurus", "Triceratops", "Mammoth", "Saber-Tooth Tiger",
     "Giant Squid", "Megalodon", "Saltwater Crocodile", "Honey Badger", "Cassowary",
-    "Ostrich", "Emu", "Red Kangaroo", "Platypus", "Echidna", "Blue Whale", "Hammerhead Shark"
-]
+    "Ostrich", "Emu", "Red Kangaroo", "Platypus", "Echidna", "Blue Whale", "Hammerhead Shark"]
 
-FANTASY_CREATURES = [
-    "Naga Api", "Phoenix", "Griffin", "Unicorn", "Werewolf", "Minotaur",
+FANTASY_CREATURES = ["Naga Api", "Phoenix", "Griffin", "Unicorn", "Werewolf", "Minotaur",
     "Hydra", "Pegasus", "Dragon Turtle", "Chimera", "Basilisk", "Wyvern",
     "Kraken", "Leviathan", "Cerberus", "Sphinx", "Manticore", "Roc",
-    "Thunderbird", "Fenrir", "Jörmungandr", "Bahamut"
-]
+    "Thunderbird", "Fenrir", "Jörmungandr", "Bahamut"]
 
-HABITATS = [
-    "Savana Afrika yang panas", "Hutan Hujan Amazon yang lebat", "Gunung Himalaya yang dingin",
+HABITATS = ["Savana Afrika yang panas", "Hutan Hujan Amazon yang lebat", "Gunung Himalaya yang dingin",
     "Laut Dalam Pasifik yang gelap", "Gurun Sahara yang terik", "Hutan Boreal Kanada",
     "Sungai Amazon yang deras", "Padang Rumput Serengeti", "Kutub Utara yang beku",
     "Hutan Tropis Indonesia", "Gunung Berapi Aktif", "Lembah Sungai Nil", "Kawah Vulkanik",
-    "Hutan Bambu Cina", "Padang Es Antartika"
-]
+    "Hutan Bambu Cina", "Padang Es Antartika"]
 
 # ==================== ACCESS CONTROL ====================
 if "access_granted" not in st.session_state:
@@ -130,33 +74,8 @@ with st.sidebar:
         st.session_state.access_granted = False
         st.rerun()
 
-# ==================== SIDEBAR ====================
-with st.sidebar:
-    st.header("⚙️ Pengaturan Cepat")
-    
-    if st.button("🔥 Pilih Pertarungan Acak", use_container_width=True):
-        if random.choice([True, False]):
-            hewan1 = random.choice(ANIMALS_WORLD)
-            hewan2 = random.choice(ANIMALS_WORLD)
-        else:
-            hewan1 = random.choice(FANTASY_CREATURES)
-            hewan2 = random.choice(ANIMALS_WORLD)
-        st.session_state.random_hewan1 = hewan1
-        st.session_state.random_hewan2 = hewan2
-        st.rerun()
+mode = st.radio("🎯 Mode", ["🦁 Real vs Real", "🦄 Fantasy vs Real", "🐉 Fantasy vs Fantasy"], horizontal=True, key="mode")
 
-# ==================== MODE SELECTION ====================
-st.subheader("🎯 Pilih Mode Pertarungan")
-
-mode = st.radio(
-    "",
-    ["🦁 Real Animal vs Real Animal",
-     "🦄 Fantasy Creature vs Real Animal",
-     "🐉 Fantasy vs Fantasy"],
-    horizontal=True
-)
-
-# ==================== INPUT SECTION ====================
 col1, col2 = st.columns(2)
 with col1:
     if "Fantasy" in mode:
@@ -175,41 +94,18 @@ with col2:
 habitat = st.selectbox("🌍 Habitat", HABITATS, key="habitat")
 habitat = st.text_input("Custom Habitat", key="custom_habitat") or habitat
 
-
-   # Slider durasi (dengan indentasi yang benar)
-if "Video" in prompt_type or "Leonardo" in prompt_type or "All-in-One" in prompt_type:
-    durasi = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
-
-    
-    if "Fantasy" in mode:
-        title = f"{attacker} vs {defender}"
-    else:
-        title = f"{attacker} vs {defender}"
-    
-    base = f"""Masterpiece epic battle between {attacker} and {defender} in the {habitat}."""
-
-    if "Image Prompt" in prompt_type:
-        prompt = f"""{base}
-Hyper-realistic, cinematic lighting, intense action, flying debris, dramatic {habitat} atmosphere, ultra detailed scales/fur/feathers, National Geographic quality, 8K, photorealistic, dynamic angle --ar 16:9 --stylize 250 --v 6"""
-    
-    elif "Video Prompt" in prompt_type:
-        prompt = f"""{base}
-Create a 12-second ultra cinematic video. Start with wide shot, slow orbiting camera, intense slow-motion clash, dramatic music swell, dust and fire particles, emotional close-ups on eyes and claws. Hyper-realistic 8K, National Geographic style. --ar 16:9 --motion high"""
-    
-    elif "Battle Analysis" in prompt_type:
-        prompt = f"""Buat analisis lengkap dan dramatis pertarungan antara {attacker} vs {defender} di {habitat}.
-Jelaskan kekuatan, strategi, kelemahan, dan prediksi pemenang dengan gaya narasi epik seperti film dokumenter."""
-    
-# ==================== PILIHAN GAYA VISUAL (BARU) ====================
+# ==================== PILIHAN GAYA VISUAL ====================
 visual_style = st.selectbox("🎨 Pilih Gaya Visual", 
     ["Cinematic Epic", "Hyper Realistic", "Dark Fantasy", 
      "National Geographic Documentary", "Slow Motion Action", "Dramatic Lighting"], 
     key="visual_style")
 
+# ==================== JENIS PROMPT (DIPINDAH KE ATAS) ====================
 prompt_type = st.radio("📝 Jenis Prompt", 
     ["🖼️ Image", "🎥 Video", "🎨 Leonardo AI", "📖 Analysis", "🔥 All-in-One"], 
     horizontal=True, key="prompt_type")
 
+# Slider durasi
 if "Video" in prompt_type or "Leonardo" in prompt_type or "All-in-One" in prompt_type:
     durasi = st.slider("Durasi Video (detik)", 5, 20, 12, key="durasi")
 
@@ -221,57 +117,38 @@ if st.button("🚀 GENERATE", use_container_width=True, type="primary", key="gen
     elif "Video" in prompt_type:
         prompt = f"{base} {durasi}-second cinematic video, slow-motion, dramatic camera movement."
     elif "Leonardo" in prompt_type:
-        prompt = f"{base} Highly detailed digital art, dramatic lighting, 8K --ar 16:9"
+        prompt = f"{base} Epic digital art, dramatic lighting, 8K --ar 16:9"
     elif "Analysis" in prompt_type:
         prompt = f"Analisis lengkap {attacker} vs {defender} di {habitat}. Kekuatan, strategi, prediksi pemenang."
-    else:  # All-in-One (Versi Sempurna)
+    else:  # All-in-One
         prompt = f"""=== ALL-IN-ONE PROMPT PACK ===
 
 🖼️ IMAGE PROMPT (Midjourney / Flux / Grok Imagine):
 {base}
-Hyper-realistic 8K, cinematic lighting, intense action, dramatic atmosphere, ultra detailed, National Geographic quality --ar 16:9 --stylize 250 --v 6
+Hyper-realistic 8K, cinematic lighting, intense action, dramatic atmosphere --ar 16:9 --stylize 250 --v 6
 
 🎥 VIDEO PROMPT (Kling AI / Runway / Luma / Pika):
 {base}
-{durasi}-second ultra cinematic video. Start with wide establishing shot, slow orbiting camera, intense slow-motion clash, dramatic music swell, dust & particles, emotional close-ups. Hyper-realistic 8K, National Geographic wildlife cinematography. --ar 16:9 --motion high
+{durasi}-second ultra cinematic video. Start with wide establishing shot, slow orbiting camera, intense slow-motion clash, dramatic music swell, dust & particles. Hyper-realistic 8K. --ar 16:9 --motion high
 
 🎨 LEONARDO AI PROMPT:
 {base}
-Highly detailed digital art, epic fantasy style, dramatic volumetric lighting, ultra realistic textures, best quality, masterpiece, 8K resolution --ar 16:9 --stylize {durasi}
+Highly detailed digital art, epic fantasy style, dramatic volumetric lighting, ultra realistic, 8K --ar 16:9 --stylize {durasi}
 
 📖 BATTLE ANALYSIS (ChatGPT / Claude):
-Buat analisis lengkap dan dramatis pertarungan antara {attacker} vs {defender} di habitat {habitat}.
-Jelaskan:
-1. Perbandingan kekuatan & kelemahan
-2. Strategi bertarung yang mungkin digunakan
-3. Simulasi pertarungan langkah demi langkah
-4. Prediksi pemenang beserta alasan ilmiah + faktor keberuntungan
+Buat analisis lengkap pertarungan {attacker} vs {defender} di {habitat}. Jelaskan kekuatan, strategi, dan prediksi pemenang dengan gaya epik."""
 
-Gunakan gaya narasi epik seperti film dokumenter hewan liar."""
-    
-    st.session_state.generated_prompt = prompt
-    st.session_state.title = title
+    st.session_state.final_prompt = prompt
+    st.session_state.final_title = f"{attacker} vs {defender}"
 
-# Display result
-if "generated_prompt" in st.session_state:
-    st.success(f"✅ Prompt untuk: {st.session_state.title}")
+if "final_prompt" in st.session_state:
+    st.success(f"✅ {st.session_state.final_title}")
+    st.code(st.session_state.final_prompt)
     
-    st.markdown(f"""
-    <div class="prompt-box">
-    {st.session_state.generated_prompt.replace(chr(10), '<br>')}
-    </div>
-    """, unsafe_allow_html=True)
-    
-    col_btn1, col_btn2 = st.columns(2)
-    
-    with col_btn1:
-        if st.button("📋 Copy Prompt", use_container_width=True):
-            st.toast("Prompt berhasil di-copy!")
-    
-    with col_btn2:
-        if st.button("🎬 Buka Kling AI + Paste", use_container_width=True):
-            st.markdown("[Klik di sini untuk buka Leonardo AI](https://app.leonardo.ai/)")
-            st.info("Setelah leonardo AI terbuka, tekan Ctrl+V untuk paste prompt otomatis.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.button("📋 Copy Prompt", key="copy_btn")
+    with col2:
+        st.button("🎬 Buka Kling AI", key="kling_btn")
 
 st.caption("By SOFYAN • https://facebook.com/yankees.romi • v3.1 • 2026")
-
