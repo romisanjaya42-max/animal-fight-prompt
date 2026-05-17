@@ -3,8 +3,8 @@ import random
 from datetime import datetime
 
 # ==================== KONFIGURASI MUDAH DIUBAH ====================
-ACCESS_KEY = "romites"
-DURASI_JAM = 1
+ACCESS_KEY = "romites2"
+DURASI_JAM = 2
 
 st.set_page_config(page_title="🐾 Animal Fight Prompt Generator", page_icon="🐾", layout="wide")
 
