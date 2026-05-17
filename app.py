@@ -145,9 +145,11 @@ if "final_prompt" in st.session_state:
     st.success(f"✅ {st.session_state.final_title}")
     st.code(st.session_state.final_prompt)
     
-    if st.button("📋 Copy Prompt", key="copy_btn"):
-        st.toast("✅ Prompt berhasil di-copy!")
+    st.info("💡 Klik ikon 📋 di pojok kanan atas kode di atas untuk menyalin prompt")
     
+    if st.button("📋 Copy Prompt", key="copy_btn"):
+        st.toast("✅ Silakan klik ikon copy di pojok kanan atas kode prompt!")
+
     if st.button("🎨 Buka Leonardo AI", key="leonardo_btn"):
         st.markdown("[Buka Leonardo AI](https://leonardo.ai)")
 
